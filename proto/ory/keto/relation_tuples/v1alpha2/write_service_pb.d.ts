@@ -108,11 +108,20 @@ export namespace DeleteRelationTuplesRequest {
 
 
     export class Query extends jspb.Message { 
-        getNamespace(): string;
+
+        hasNamespace(): boolean;
+        clearNamespace(): void;
+        getNamespace(): string | undefined;
         setNamespace(value: string): Query;
-        getObject(): string;
+
+        hasObject(): boolean;
+        clearObject(): void;
+        getObject(): string | undefined;
         setObject(value: string): Query;
-        getRelation(): string;
+
+        hasRelation(): boolean;
+        clearRelation(): void;
+        getRelation(): string | undefined;
         setRelation(value: string): Query;
 
         hasSubject(): boolean;
@@ -132,9 +141,9 @@ export namespace DeleteRelationTuplesRequest {
 
     export namespace Query {
         export type AsObject = {
-            namespace: string,
-            object: string,
-            relation: string,
+            namespace?: string,
+            object?: string,
+            relation?: string,
             subject?: ory_keto_relation_tuples_v1alpha2_relation_tuples_pb.Subject.AsObject,
         }
     }

@@ -3,6 +3,7 @@ package expand
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/ory/keto/ketoapi"
 	"strings"
 
 	rts "github.com/ory/keto/proto/ory/keto/relation_tuples/v1alpha2"
@@ -12,7 +13,6 @@ import (
 	"github.com/ory/keto/internal/relationtuple"
 )
 
-// swagger:enum NodeType
 type NodeType string
 
 const (
@@ -22,63 +22,10 @@ const (
 	Leaf         NodeType = "leaf"
 )
 
-// swagger:ignore
 type Tree struct {
 	Type     NodeType              `json:"type"`
 	Subject  relationtuple.Subject `json:"subject"`
 	Children []*Tree               `json:"children,omitempty"`
-}
-
-var (
-	ErrUnknownNodeType = errors.New("unknown node type")
-)
-
-func (t NodeType) String() string {
-	return string(t)
-}
-
-func (t *NodeType) UnmarshalJSON(v []byte) error {
-	switch string(v) {
-	case `"union"`:
-		*t = Union
-	case `"exclusion"`:
-		*t = Exclusion
-	case `"intersection"`:
-		*t = Intersection
-	case `"leaf"`:
-		*t = Leaf
-	default:
-		return ErrUnknownNodeType
-	}
-	return nil
-}
-
-func (t NodeType) ToProto() rts.NodeType {
-	switch t {
-	case Leaf:
-		return rts.NodeType_NODE_TYPE_LEAF
-	case Union:
-		return rts.NodeType_NODE_TYPE_UNION
-	case Exclusion:
-		return rts.NodeType_NODE_TYPE_EXCLUSION
-	case Intersection:
-		return rts.NodeType_NODE_TYPE_INTERSECTION
-	}
-	return rts.NodeType_NODE_TYPE_UNSPECIFIED
-}
-
-func NodeTypeFromProto(t rts.NodeType) NodeType {
-	switch t {
-	case rts.NodeType_NODE_TYPE_LEAF:
-		return Leaf
-	case rts.NodeType_NODE_TYPE_UNION:
-		return Union
-	case rts.NodeType_NODE_TYPE_EXCLUSION:
-		return Exclusion
-	case rts.NodeType_NODE_TYPE_INTERSECTION:
-		return Intersection
-	}
-	return Leaf
 }
 
 // swagger:model expandTree
@@ -90,12 +37,12 @@ type node struct {
 	SubjectSet *relationtuple.SubjectSet `json:"subject_set,omitempty"`
 }
 
-func (n *node) toTree() (*Tree, error) {
-	t := &Tree{}
+func (t *Tree) toAPITree() (*ketoapi.ExpandTree, error) {
+	 := &ketoapi.ExpandTree{}
 	if n.SubjectID == nil && n.SubjectSet == nil {
-		return nil, errors.WithStack(relationtuple.ErrNilSubject)
+		return nil, errors.WithStack(ketoapi.ErrNilSubject)
 	} else if n.SubjectID != nil && n.SubjectSet != nil {
-		return nil, errors.WithStack(relationtuple.ErrDuplicateSubject)
+		return nil, errors.WithStack(ketoapi.ErrDuplicateSubject)
 	}
 
 	if n.SubjectID != nil {

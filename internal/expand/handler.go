@@ -2,6 +2,7 @@ package expand
 
 import (
 	"context"
+	"github.com/ory/keto/ketoapi"
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"
@@ -80,7 +81,7 @@ func (h *handler) getExpand(w http.ResponseWriter, r *http.Request, _ httprouter
 		return
 	}
 
-	subject := (&relationtuple.SubjectSet{}).FromURLQuery(r.URL.Query())
+	subject := (&ketoapi.SubjectSet{}).FromURLQuery(r.URL.Query())
 
 	if err := h.d.UUIDMappingManager().MapFieldsToUUID(r.Context(), subject); err != nil {
 		h.d.Writer().WriteError(w, r, err)

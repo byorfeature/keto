@@ -13,13 +13,7 @@
 
 var jspb = require('google-protobuf');
 var goog = jspb;
-var global = (function() {
-  if (this) { return this; }
-  if (typeof window !== 'undefined') { return window; }
-  if (typeof global !== 'undefined') { return global; }
-  if (typeof self !== 'undefined') { return self; }
-  return Function('return this')();
-}.call(null));
+var global = (function() { return this || window || global || self || Function('return this')(); }).call(null);
 
 var ory_keto_relation_tuples_v1alpha2_relation_tuples_pb = require('../../../../ory/keto/relation_tuples/v1alpha2/relation_tuples_pb.js');
 goog.object.extend(proto, ory_keto_relation_tuples_v1alpha2_relation_tuples_pb);
@@ -373,22 +367,22 @@ proto.ory.keto.relation_tuples.v1alpha2.ListRelationTuplesRequest.Query.prototyp
  */
 proto.ory.keto.relation_tuples.v1alpha2.ListRelationTuplesRequest.Query.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getNamespace();
-  if (f.length > 0) {
+  f = /** @type {string} */ (jspb.Message.getField(message, 1));
+  if (f != null) {
     writer.writeString(
       1,
       f
     );
   }
-  f = message.getObject();
-  if (f.length > 0) {
+  f = /** @type {string} */ (jspb.Message.getField(message, 2));
+  if (f != null) {
     writer.writeString(
       2,
       f
     );
   }
-  f = message.getRelation();
-  if (f.length > 0) {
+  f = /** @type {string} */ (jspb.Message.getField(message, 3));
+  if (f != null) {
     writer.writeString(
       3,
       f
@@ -419,7 +413,25 @@ proto.ory.keto.relation_tuples.v1alpha2.ListRelationTuplesRequest.Query.prototyp
  * @return {!proto.ory.keto.relation_tuples.v1alpha2.ListRelationTuplesRequest.Query} returns this
  */
 proto.ory.keto.relation_tuples.v1alpha2.ListRelationTuplesRequest.Query.prototype.setNamespace = function(value) {
-  return jspb.Message.setProto3StringField(this, 1, value);
+  return jspb.Message.setField(this, 1, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.ory.keto.relation_tuples.v1alpha2.ListRelationTuplesRequest.Query} returns this
+ */
+proto.ory.keto.relation_tuples.v1alpha2.ListRelationTuplesRequest.Query.prototype.clearNamespace = function() {
+  return jspb.Message.setField(this, 1, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.ory.keto.relation_tuples.v1alpha2.ListRelationTuplesRequest.Query.prototype.hasNamespace = function() {
+  return jspb.Message.getField(this, 1) != null;
 };
 
 
@@ -437,7 +449,25 @@ proto.ory.keto.relation_tuples.v1alpha2.ListRelationTuplesRequest.Query.prototyp
  * @return {!proto.ory.keto.relation_tuples.v1alpha2.ListRelationTuplesRequest.Query} returns this
  */
 proto.ory.keto.relation_tuples.v1alpha2.ListRelationTuplesRequest.Query.prototype.setObject = function(value) {
-  return jspb.Message.setProto3StringField(this, 2, value);
+  return jspb.Message.setField(this, 2, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.ory.keto.relation_tuples.v1alpha2.ListRelationTuplesRequest.Query} returns this
+ */
+proto.ory.keto.relation_tuples.v1alpha2.ListRelationTuplesRequest.Query.prototype.clearObject = function() {
+  return jspb.Message.setField(this, 2, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.ory.keto.relation_tuples.v1alpha2.ListRelationTuplesRequest.Query.prototype.hasObject = function() {
+  return jspb.Message.getField(this, 2) != null;
 };
 
 
@@ -455,7 +485,25 @@ proto.ory.keto.relation_tuples.v1alpha2.ListRelationTuplesRequest.Query.prototyp
  * @return {!proto.ory.keto.relation_tuples.v1alpha2.ListRelationTuplesRequest.Query} returns this
  */
 proto.ory.keto.relation_tuples.v1alpha2.ListRelationTuplesRequest.Query.prototype.setRelation = function(value) {
-  return jspb.Message.setProto3StringField(this, 3, value);
+  return jspb.Message.setField(this, 3, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.ory.keto.relation_tuples.v1alpha2.ListRelationTuplesRequest.Query} returns this
+ */
+proto.ory.keto.relation_tuples.v1alpha2.ListRelationTuplesRequest.Query.prototype.clearRelation = function() {
+  return jspb.Message.setField(this, 3, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.ory.keto.relation_tuples.v1alpha2.ListRelationTuplesRequest.Query.prototype.hasRelation = function() {
+  return jspb.Message.getField(this, 3) != null;
 };
 
 

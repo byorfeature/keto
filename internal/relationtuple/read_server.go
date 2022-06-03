@@ -2,6 +2,7 @@ package relationtuple
 
 import (
 	"context"
+	"github.com/ory/keto/ketoapi"
 	"net/http"
 	"strconv"
 
@@ -26,7 +27,8 @@ func (h *handler) ListRelationTuples(ctx context.Context, req *rts.ListRelationT
 		return nil, errors.New("invalid request")
 	}
 
-	q, err := (&RelationQuery{}).FromProto(req.Query)
+	req.GetQuery().GetObject()
+	q, err := (&ketoapi.RelationQuery{}).FromDataProvider(req.Query)
 	if err != nil {
 		return nil, err
 	}
@@ -121,7 +123,7 @@ type getRelationsParams struct {
 //       500: genericError
 func (h *handler) getRelations(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	q := r.URL.Query()
-	query, err := (&RelationQuery{}).FromURLQuery(q)
+	query, err := (&ketoapi.RelationQuery{}).FromURLQuery(q)
 	if err != nil {
 		h.d.Writer().WriteError(w, r, herodot.ErrBadRequest.WithError(err.Error()))
 		return
