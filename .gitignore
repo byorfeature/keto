@@ -1,7 +1,1 @@
-node_modules/
-.idea/
-coverage.txt
-dist/
-**/*.sqlite
-**/*.sqlite-journal
-.vscode/
+target
